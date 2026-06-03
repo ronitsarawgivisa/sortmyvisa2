@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Sort My Visa"
+version = "1.0.0"
+id = "artifacts/sort-my-visa"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21910
+
+[services.development]
+run = "pnpm --filter @workspace/sort-my-visa run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/sort-my-visa", "run", "build" ]
+publicDir = "artifacts/sort-my-visa/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21910"
+BASE_PATH = "/"
